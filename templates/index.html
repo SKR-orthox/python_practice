@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>주식 현재가 조회</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", sans-serif; margin: 40px; }
+    .card { max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #eee; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,.06); }
+    h1 { margin-top: 0; font-size: 22px; }
+    form { display: flex; gap: 8px; margin-top: 12px; }
+    input[type=text] { flex: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 10px; }
+    button { padding: 10px 16px; border: 0; border-radius: 10px; background: #111; color: #fff; cursor: pointer; }
+    button:hover { opacity: .9; }
+    .muted { color: #666; font-size: 13px; }
+    .result { margin-top: 20px; padding: 12px; border-radius: 12px; background: #f7f7f9; }
+    .error { margin-top: 16px; color: #b00020; }
+    .tip { margin-top: 12px; font-size: 13px; color: #444; }
+    .footer { margin-top: 28px; color: #777; font-size: 12px; }
+    code { background: #f3f3f6; padding: 2px 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>주식 현재가 조회</h1>
+    <p class="muted">예시: 한국 6자리 <code>005930</code> 또는 완전한 티커 <code>005930.KS</code> / 미국 <code>AAPL</code> / 일본 <code>7203.T</code></p>
+
+    <form method="post">
+      <input type="text" name="code" placeholder="티커 또는 6자리 종목코드" required />
+      <button type="submit">조회</button>
+    </form>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if price %}
+      <div class="result">
+        <div><strong>티커</strong>: {{ final_ticker }}</div>
+        <div><strong>현재가(지연)</strong>: {{ "{:,.2f}".format(price) }}</div>
+        {% if ts %}
+          <div class="muted">기준시각: {{ ts }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="tip">
+      💡 한국 6자리만 넣으면 코스피(<code>.KS</code>) → 코스닥(<code>.KQ</code>) 순서로 자동 확인합니다.
+    </div>
+
+    <div class="footer">
+      데이터는 지연 제공될 수 있습니다. 투자 판단은 본인 책임입니다.
+    </div>
+  </div>
+</body>
+</html>
