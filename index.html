@@ -29,7 +29,7 @@
 
 <script>
   // ❶ 배포한 백엔드 주소로 바꾸세요
-  const API = "https://<여기에-Render-배포-도메인>/quote";
+  const API = "https://stock-backend-xyz.onrender.com/quote";
 
   const codeEl = document.querySelector('#code');
   const btn = document.querySelector('#btn');
@@ -56,3 +56,4 @@
   btn.addEventListener('click', fetchPrice);
   codeEl.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') fetchPrice(); });
 </script>
+
