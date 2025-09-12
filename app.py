@@ -4,7 +4,7 @@ from flask_cors import CORS
 import yfinance as yf
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "https://skr-orthox.github.io"}})  # 본인 Pages 도메인
+CORS(app, resources={r"/*": {"origins": "pages_domain"}})  # 본인 Pages 도메인
 
 def get_price(ticker: str):
     t = yf.Ticker(ticker)
@@ -37,3 +37,4 @@ def quote():
     return jsonify({"error":"ticker not found"}), 404
 
 # 배포 시 Start command: gunicorn app:app
+
