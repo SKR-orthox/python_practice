@@ -1,3 +1,5 @@
+.gitignore
+
 pandas_data_xlsx.xlsx
 
 pandas_data_csv.csv
